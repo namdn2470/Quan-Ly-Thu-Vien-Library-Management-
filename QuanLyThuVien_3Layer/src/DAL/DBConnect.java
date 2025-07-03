@@ -8,8 +8,6 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.Driver;
-
 import DTO.LoaisachDTO;
 
 public class DBConnect {
@@ -22,7 +20,7 @@ public class DBConnect {
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
 			// System.out.println("connect successfully!");
 		} catch (Exception ex) {
@@ -37,8 +35,8 @@ public class DBConnect {
 	        pro.put("user",USER_NAME );
 	        pro.put("password", PASSWORD);
 	        try {
-	            com.mysql.jdbc.Driver driver = new Driver();
-	            conn = driver.connect(DB_URL, pro);
+				com.mysql.cj.jdbc.Driver driver = new com.mysql.cj.jdbc.Driver();
+				conn = driver.connect(DB_URL, pro);
 	        } catch (SQLException ex) {
 	           JOptionPane.showMessageDialog(null, "Không thể kết nối tới csdl");
 	            System.exit(0);

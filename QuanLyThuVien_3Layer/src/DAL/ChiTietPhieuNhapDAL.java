@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import DTO.ChiTietPhieuNhap;
-import DTO.PhieuNhap;
 
 public class ChiTietPhieuNhapDAL {
 	public static ArrayList<ChiTietPhieuNhap> getdanhsachctphieunhap() {
@@ -31,8 +30,7 @@ public class ChiTietPhieuNhapDAL {
 
 			return dsl;
 		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			return new ArrayList<ChiTietPhieuNhap>();
 		}
 
 	}

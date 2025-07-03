@@ -1,16 +1,8 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,19 +10,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
 import javax.swing.border.MatteBorder;
 
 import BUS.TaiKhoanBus;
-import DAL.DBConnect;
-import DTO.LoaisachDTO;
 import DTO.TaiKhoan;
 
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -39,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 
 public class LoginForm extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Launch the application.
@@ -160,12 +149,12 @@ public class LoginForm extends JFrame {
 				if (checkboxrm.isSelected()) {
 					pref.put("Email", txtUser.getText());
 
-					pref.put("Password", txtPass.getText());
+					pref.put("Password", new String(txtPass.getPassword()));
 				}
 
 				for (TaiKhoan taiKhoan2 : taikhoan) {
 					if (taiKhoan2.getUsername().trim().equals(txtUser.getText().trim())
-							&& taiKhoan2.getPassword().trim().equals(txtPass.getText().trim())) {
+							&& taiKhoan2.getPassword().trim().equals(new String(txtPass.getPassword()).trim())) {
 
 						JOptionPane.showMessageDialog(contentPane, "Đăng NhậpThành Công");
 						isdangnhap = true;
@@ -205,7 +194,6 @@ public class LoginForm extends JFrame {
 			System.out.println("Loi khong luu duoc email passs");
 
 		} else {
-			String user = Email;
 			pref.put("Email", Email);
 			String pass = Pass;
 			pref.put("Password", pass);
@@ -215,14 +203,14 @@ public class LoginForm extends JFrame {
 
 	public void checked(boolean remember) {
 		if (remember) {
-			savenmailpass(txtUser.getText(), txtPass.getText());
+			savenmailpass(txtUser.getText(), new String(txtPass.getPassword()));
 		} else {
 			System.out.println("null");
 		}
 	}
 
 	private void moveFrame(int x, int y) {
-		// TODO Auto-generated method stub
+		
 		this.setLocation(x - x_mouse, y - y_mouse);
 	}
 
@@ -232,7 +220,7 @@ public class LoginForm extends JFrame {
 
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+		
 				x_mouse = arg0.getX();
 				y_mouse = arg0.getY();
 
@@ -240,7 +228,6 @@ public class LoginForm extends JFrame {
 
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 				moveFrame(arg0.getXOnScreen(), arg0.getYOnScreen());
 
 			}
